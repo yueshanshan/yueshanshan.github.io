@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>GitHub多人协作开发冲突问题的解决方法 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.张三的操作1.1 修改了read.js的第二行代码为  1console.log(&quot;张三&quot;)    1.2 提交 12345$ git add read.js$ git commit –m &quot;张三修改read.js第二行代码&quot;$ git push    2.李四的操作2.1 李四修改read.js第二行代码为     1console.log(&quot;李四&quot;);  2.2 提交 12345$ git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitHub多人协作开发冲突问题的解决方法">
+<meta property="og:url" content="http://yoursite.com/2019/10/18/GitHub%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.张三的操作1.1 修改了read.js的第二行代码为  1console.log(&quot;张三&quot;)    1.2 提交 12345$ git add read.js$ git commit –m &quot;张三修改read.js第二行代码&quot;$ git push    2.李四的操作2.1 李四修改read.js第二行代码为     1console.log(&quot;李四&quot;);  2.2 提交 12345$ git">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:%5CUsers%5C16905%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1582035523796.png">
+<meta property="og:image" content="c:%5CUsers%5C16905%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1582035644220.png">
+<meta property="article:published_time" content="2019-10-18T13:50:26.000Z">
+<meta property="article:modified_time" content="2020-02-18T14:24:38.650Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5C16905%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1582035523796.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-GitHub多人协作开发冲突问题的解决方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/18/GitHub%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="article-date">
+  <time datetime="2019-10-18T13:50:26.000Z" itemprop="datePublished">2019-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      GitHub多人协作开发冲突问题的解决方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="1-张三的操作"><a href="#1-张三的操作" class="headerlink" title="1.张三的操作"></a>1.张三的操作</h5><p>1.1 修改了read.js的第二行代码为 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log("张三")</span><br></pre></td></tr></table></figure>
+
+
+
+<p>1.2 提交</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git add read.js</span><br><span class="line"></span><br><span class="line">$ git commit –m <span class="string">"张三修改read.js第二行代码"</span></span><br><span class="line"></span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-李四的操作"><a href="#2-李四的操作" class="headerlink" title="2.李四的操作"></a>2.李四的操作</h5><p>2.1 李四修改read.js第二行代码为    </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log("李四");</span><br></pre></td></tr></table></figure>
+
+<p>2.2 提交</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git add read.js</span><br><span class="line"></span><br><span class="line">$ git commit –m <span class="string">"李四修改read.js第二行代码"</span></span><br><span class="line"></span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-出现的问题"><a href="#3-出现的问题" class="headerlink" title="3.出现的问题"></a>3.出现的问题</h5><p>3.1 当李四敲入git push命令的时候报错</p>
+<p><img src="C:%5CUsers%5C16905%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1582035523796.png" alt="1582035523796"></p>
+<h6 id="分析：错误产生的原因是服务器有比李四客户端更先进的代码，所以李四的代码没有办法提交到服务器。"><a href="#分析：错误产生的原因是服务器有比李四客户端更先进的代码，所以李四的代码没有办法提交到服务器。" class="headerlink" title="分析：错误产生的原因是服务器有比李四客户端更先进的代码，所以李四的代码没有办法提交到服务器。"></a>分析：错误产生的原因是服务器有比李四客户端更先进的代码，所以李四的代码没有办法提交到服务器。</h6><h6 id="解决方案：李四应该先pull，再push"><a href="#解决方案：李四应该先pull，再push" class="headerlink" title="解决方案：李四应该先pull，再push"></a>解决方案：李四应该先pull，再push</h6><p>//3.2 当李四敲入 git pull命令的时候报错</p>
+<p><img src="C:%5CUsers%5C16905%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1582035644220.png" alt="1582035644220"></p>
+<h6 id="分析：引入服务器的read-js的第二行代码为console-log-“张三”-，而李四本地的read-js的第二行代码为console-log-“李四”-，所以同一个文件的同一行代码有两个实现，此时肯定冲突了"><a href="#分析：引入服务器的read-js的第二行代码为console-log-“张三”-，而李四本地的read-js的第二行代码为console-log-“李四”-，所以同一个文件的同一行代码有两个实现，此时肯定冲突了" class="headerlink" title="分析：引入服务器的read.js的第二行代码为console.log(“张三”)，而李四本地的read.js的第二行代码为console.log(“李四”)，所以同一个文件的同一行代码有两个实现，此时肯定冲突了"></a>分析：引入服务器的read.js的第二行代码为console.log(“张三”)，而李四本地的read.js的第二行代码为console.log(“李四”)，所以同一个文件的同一行代码有两个实现，此时肯定冲突了</h6><h6 id="解决：删除李四本地read-js中的所有-lt-lt-lt-lt-lt-gt-gt-gt-gt-gt-gt-gt"><a href="#解决：删除李四本地read-js中的所有-lt-lt-lt-lt-lt-gt-gt-gt-gt-gt-gt-gt" class="headerlink" title="解决：删除李四本地read.js中的所有&lt;&lt;&lt;&lt;&lt; ======  &gt;&gt;&gt;&gt;&gt;&gt;&gt;"></a>解决：删除李四本地read.js中的所有&lt;&lt;&lt;&lt;&lt; ======  &gt;&gt;&gt;&gt;&gt;&gt;&gt;</h6><p>然后再</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git add read.js</span><br><span class="line"></span><br><span class="line">   $ git commit -m <span class="string">"解决了read.js的冲突问题"</span></span><br><span class="line"></span><br><span class="line">   $ git push</span><br></pre></td></tr></table></figure>
+
+<p>此时问题解决。</p>
+<hr>
+<h5 id="冲突问题产生的原因"><a href="#冲突问题产生的原因" class="headerlink" title="冲突问题产生的原因:"></a>冲突问题产生的原因:</h5><ol>
+<li><p>多个人修改同一个文件；</p>
+</li>
+<li><p>比如A和B两个人，A先修改，提交，push；B再修改，提交，pull；此时就出现了冲突。</p>
+</li>
+</ol>
+<h4 id="解决冲突的最好方案：尽量避免多人修改同一个文件。"><a href="#解决冲突的最好方案：尽量避免多人修改同一个文件。" class="headerlink" title="解决冲突的最好方案：尽量避免多人修改同一个文件。"></a>解决冲突的最好方案：尽量避免多人修改同一个文件。</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/18/GitHub%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="ck6s1fm2d0000vsujbawaajcd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/10/18/GitHub%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">GitHub多人协作开发冲突问题的解决方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
